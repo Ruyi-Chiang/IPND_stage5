@@ -177,12 +177,18 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Stage5-Titanic-Data-Analysis">Stage5 Titanic Data Analysis<a class="anchor-link" href="#Stage5-Titanic-Data-Analysis">&#182;</a></h2><p>dataset: Titanic Data</p>
+<p>This dataset contains demographics and passenger information from 891 of the 2,224 passengers and crew on board the Titanic.</p>
+<h6 id="Missing-data:">Missing data:<a class="anchor-link" href="#Missing-data:">&#182;</a></h6><p>There are 177 missing data in Age data, 687 missing data in Cabin data and 2 missing data in Embarked data. The data are missing at random. In this analysis, I would simply ignore these missing data by using Pandas built-in functions, such as .describe(), .corr(). The functions will exclude missing data by default.</p>
 <h3 id="Question:-What-factors-made-people-more-likely-to-survive?">Question: What factors made people more likely to survive?<a class="anchor-link" href="#Question:-What-factors-made-people-more-likely-to-survive?">&#182;</a></h3><p>=============</p>
 <h6 id="Factor1:-Class">Factor1: Class<a class="anchor-link" href="#Factor1:-Class">&#182;</a></h6><p>Passengers in upper class have higher chance to survive. The survival rate of assengers in Upper class(Class1) is 2.5 times higher than the rate of passengers in Lower class(Class3)</p>
 <h6 id="Factor2:-Age">Factor2: Age<a class="anchor-link" href="#Factor2:-Age">&#182;</a></h6><p>Babies and kids(aged from 0 to 10) have the highest survival rate, 0.59, followed by middle-aged group(aged from 30 to 40) with 0.44 survival rate.</p>
 <h6 id="Factor3:-Gender">Factor3: Gender<a class="anchor-link" href="#Factor3:-Gender">&#182;</a></h6><p>Female passengers have higher chance to survive. Female survival rate is 0.74, which is 3.9 times higher than the rate of male passengers. There is huge gender inequality of survival rate accross all age groups, except babies and kids(aged from 0 to 10).</p>
 <p>While comparing the male fatalities by age, male in twenties and thirties accounts for the major fatalities in the sinking of Titanic. It might because male takes the major responsibility to rescue or be in charge of the functionality of Titanic and let kids or female to evacuate first.</p>
 <h6 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h6><p>Overall, if you are a kid living in upper class, you might have the best chance to evacuate and survive from Titanic tragedy.</p>
+<ul>
+<li>Limitations</li>
+</ul>
+<p>There are total 2,224 passengers and crew on board the Titanic. However, we can only analyze the 891 passengers data out of 2,224, which accounts for only 40% of passenger data. It might cause bias about this survival factor analysis. For improvement, it might be great if we can retrieve the data of total 2,224 passengers.</p>
 
 </div>
 </div>
@@ -198,7 +204,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[283]:</div>
+<div class="prompt input_prompt">In&nbsp;[130]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -214,13 +220,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[284]:</div>
+<div class="prompt input_prompt">In&nbsp;[131]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Read Titanic data as Pandas dataframe and use .describe() &amp; .head() &amp; .dtypes to get the idea of the data </span>
 <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;titanic_data.csv&#39;</span>
 <span class="n">titanic_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-<span class="n">titanic_df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="n">titanic_df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span> <span class="c1"># .describe() will exclude NaN data</span>
 </pre></div>
 
 </div>
@@ -231,7 +237,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[284]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[131]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -342,7 +348,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[285]:</div>
+<div class="prompt input_prompt">In&nbsp;[132]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">titanic_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -356,7 +362,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[285]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[132]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -467,7 +473,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[286]:</div>
+<div class="prompt input_prompt">In&nbsp;[133]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">titanic_df</span><span class="o">.</span><span class="n">dtypes</span>
@@ -481,7 +487,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[286]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[133]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -508,7 +514,7 @@ dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[287]:</div>
+<div class="prompt input_prompt">In&nbsp;[134]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="sd">&#39;&#39;&#39;Use Pandas .corr() to calculate the correlation coefficient of Survived with other factors. </span>
@@ -525,7 +531,7 @@ dtype: object</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[287]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[134]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -547,14 +553,102 @@ Name: Survived, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[288]:</div>
+<div class="prompt input_prompt">In&nbsp;[135]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c1"># Check the number of missing data in each column</span>
+<span class="n">titanic_df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[135]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>PassengerId      0
+Survived         0
+Pclass           0
+Name             0
+Sex              0
+Age            177
+SibSp            0
+Parch            0
+Ticket           0
+Fare             0
+Cabin          687
+Embarked         2
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[136]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c1"># Checking the number of unique PassengerId and number of survivors in this dataset.</span>
+<span class="c1"># Comparing to total 2,224 passengers and crew on board the Titanic.</span>
+<span class="k">print</span> <span class="s1">&#39;Number of unique PassengerId:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">titanic_df</span><span class="o">.</span><span class="n">PassengerId</span><span class="p">))</span>
+<span class="k">print</span> <span class="s1">&#39;Number of survivors in this dataset:&#39;</span><span class="p">,</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">Survived</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Number of unique PassengerId: 891
+Number of survivors in this dataset: 342
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[137]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c1"># Function to calculate survival rate by given group name</span>
+<span class="k">def</span> <span class="nf">survival_rate_calculator</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">group_name</span><span class="p">):</span>
+    <span class="n">total_number_by_group</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">group_name</span><span class="p">)[</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">survived_number_by_group</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">group_name</span><span class="p">)[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">survived_number_by_group</span> <span class="o">/</span> <span class="n">total_number_by_group</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[138]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Look into survival rate by class</span>
-
-<span class="n">class_distribution</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Pclass&#39;</span><span class="p">)[</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="n">class_survived</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Pclass&#39;</span><span class="p">)[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">survived_rate_by_class</span> <span class="o">=</span> <span class="n">class_survived</span> <span class="o">/</span> <span class="n">class_distribution</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">survival_rate_by_class</span> <span class="o">=</span> <span class="n">survival_rate_calculator</span><span class="p">(</span><span class="n">titanic_df</span><span class="p">,</span> <span class="s1">&#39;Pclass&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">survived_rate_by_class</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">survived_rate_by_class</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Survival Rate by Class&#39;</span><span class="p">)</span>
@@ -698,10 +792,11 @@ Survival Rate(Class1 vs. Class3): 2.59788359788
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[289]:</div>
+<div class="prompt input_prompt">In&nbsp;[139]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Compare those who survived and those who didn&#39;t survive by class</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="n">titanic_df</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">by</span><span class="o">=</span> <span class="n">titanic_df</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="k">print</span> <span class="s1">&#39;People stay in Lower Class(class3) are the majority of those who did not survive(Historgram title with &quot;0&quot;)&#39;</span>
 </pre></div>
@@ -846,16 +941,501 @@ PQuCJAmwIEiSShYESRJgQZAklf4/lfsBfZSsllEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[296]:</div>
+<div class="prompt input_prompt">In&nbsp;[140]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">titanic_df</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">]</span>
+<span class="n">titanic_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Fare&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">aver_fare_by_class</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Pclass&#39;</span><span class="p">)[</span><span class="s1">&#39;Fare&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">df_by_class</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">survived_rate_by_class</span><span class="p">,</span> <span class="n">aver_fare_by_class</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_by_class</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Avg. Survival Rate&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Fare&#39;</span><span class="p">]</span>
+<span class="n">df_by_class</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Class1&#39;</span><span class="p">,</span> <span class="s1">&#39;Class2&#39;</span><span class="p">,</span> <span class="s1">&#39;Class3&#39;</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">df_by_class</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span> <span class="s1">&#39;Avg. Survival Rate&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Avg. Fare&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span> <span class="p">(</span><span class="mf">500.5</span><span class="p">,</span> <span class="mf">500.5</span><span class="p">,</span> <span class="mf">500.5</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df_by_class</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">df_by_class</span>
+<span class="k">print</span> <span class="s1">&#39;&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYkAAAERCAYAAACO6FuTAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xt8XGWd+PHPZC7J5J60SUrTW9rSJ1AoUKAqykVf4g0V
+dd31B+iKsl6gVnBRf4iI0LXC7gILshTcFQRdRVflt7rbRVFxaYuXopWFQvO0adNb0ja3SSaTmWSu
+vz/O5MyZyZzpNCSZSef7fr36emXOOT3znGdmzvec5/k+z3EkEgmEEEKIbMoKXQAhhBDFS4KEEEII
+WxIkhBBC2JIgIYQQwpYECSGEELYkSAghhLDlKsSbKqVuAd4LuIHNwFbgcSAO7NJar09u9wngk0AE
+2KS13lKI8gohRKma9TsJpdSlwBu01hcBlwFLgPuAW7XWlwJlSqkrlVItwAbgDcA7gLuUUu7ZLq8Q
+QpSyQjQ3vR3YpZT6D+BnwH8Ba7XW25LrnwYuB9YB27XWUa21H9gLrClAeYUQomQVorlpPsbdw7uB
+5RiBwhqsRoBaoAYYtiwPAHWzVEYhhBAUJkgMALu11lFgj1JqDFhkWV8DDAF+jGCRuVwIIcQsKUSQ
+2A58FvgnpdRCoAr4tVLqUq31c8A7gWeBF4BNSikP4AXagV0n2nk0Gku4XM4ZK7wQQpyiHFkXFmKC
+P6XU3cBbMAr1JeAA8C2MbKfdwCe01gml1HXAp5LbbdJa/8eJ9t3XN1LwGQubmmro6xspdDGKgtRF
+itRFitRFSrHURVNTTdYgUZAUWK31LVkWX5Zlu0eBR2e8QEIIIbKSwXRCCCFsSZAQQghhS4KEEEII
+WxIkhBBC2JIgIYQQwpYECSGEELYkSAghhLAlQUIIIYQtCRJCCCFsSZAQQghhS4KEEEIIWxIkhBBC
+2JIgIYQQwpYECSGEELYkSAghhLAlQUIIIYQtCRJCCCFsSZAQQghhS4KEEEIIWxIkhBBC2JIgIYQQ
+wpYECSGEELYkSAghhLDlKnQBhCh2XV1d3HTng8SctTjGB1m+7DSiZXU0eBPcfP3VNNQ3FLqIQsyY
+ggUJpdSfgOHkyy7g68DjQBzYpbVen9zuE8AngQiwSWu9ZfZLK0rZTXc+SKO6AofDQSKRYHfHNhad
+0U4wkeDeR57ka7fcUOgiCjFjChIklFLlAFrrt1iW/RS4VWu9TSn1sFLqSuD3wAZgLVAJbFdKPaO1
+jhSi3KI0xZy1OBwOABwOB25Phfm3L1jIkgkx8wp1J3EOUKWU+gXgBL4MrNVab0uufxp4G8ZdxXat
+dRTwK6X2AmuAPxWgzKJEOaPDJBIJ804iEh4DIJFI0FBZ4MIJMcMK1XEdBP5Ra/124Hrge4DDsn4E
+qAVqSDVJAQSAutkqpBAA92/8LIN6C717t9L/6s84Y3E53mAHrQ7NzZ++qtDFE2JGFepOYg/QCaC1
+3quUGsBoUppQAwwBfoxgkbncVkNDJS6Xc3pLOwVNTTWFLkLRmOt10dS0ht9u+ddp2tfcrovpJHWR
+Usx1Uagg8XHgbGC9UmohRiB4Ril1qdb6OeCdwLPAC8AmpZQH8ALtwK5cO/YVQSNxU1MNfX0jhS5G
+UZC6SJG6SJG6SCmWurALVIUKEo8C31ZKbcPod7gWGAC+pZRyA7uBH2utE0qpbwDbMZqjbtVahwtU
+ZiGEKDkFCRLJ7KQPZ1l1WZZtH8UIKkIIIWaZjLgWQghhS4KEEEIIWxIkhBBC2JIgIYQQwpYECSGE
+ELYkSAghhLAlQUIIIYQtCRJCCCFsSZAQQghhS4KEEEIIWxIkhBBC2JIgIYQQwpYECSGEELYkSAgh
+hLAlQUIIIYQtCRJCCCFsSZAQQghhS4KEEEIIWxIkhBBC2JIgIYQQwpYECSGEELYkSAghhLAlQUII
+IYQtCRJCCCFsuQr1xkqpZuCPwFuBGPA4EAd2aa3XJ7f5BPBJIAJs0lpvKUxphRCiNBXkTkIp5QIe
+AYLJRfcBt2qtLwXKlFJXKqVagA3AG4B3AHcppdyFKK8QQpSqQjU33QM8DPQADmCt1npbct3TwOXA
+OmC71jqqtfYDe4E1hSisEEKUqlkPEkqpa4FerfUvMQJEZjlGgFqgBhi2LA8AdbNRRiGEEIZC9El8
+DIgrpS4HzgG+AzRZ1tcAQ4AfI1hkLs+poaESl8s5faWdoqammkIXoWhIXaRIXaRIXaQUc104EolE
+wd5cKfUs8GngH4F7tdZblVIPA88CW4FngAsBL/A74FytdTjXPvv6Rgp3QElNTTX09Y0UuhhFQeoi
+ReoiReoipVjqoqmpxpFtecGymzJ8HvjXZMf0buDHWuuEUuobwHaMZqlbTxQghBBCTK+CBgmt9Vss
+Ly/Lsv5R4NFZK5AQQog0MphOCCGELQkSQgghbEmQEEIIYUuChBBCCFsSJIQQQtiSICGEEMKWBAkh
+hBC2JEgIIYSwJUFCCCGELQkSQgghbEmQEEIIYUuChBBCCFsSJIQQQtiSICGEEMKWBAkhhBC2JEgI
+IYSwJUFCCCGELQkSQgghbEmQEEIIYUuChBBCCFsSJIQQQtiSICGEEMKWBAkhhBC2JEgIIYSw5SrE
+myqlyoB/BRQQBz4NjAOPJ1/v0lqvT277CeCTQATYpLXeUogyCyFEKSrUncR7gITW+k3AV4CvA/cB
+t2qtLwXKlFJXKqVagA3AG4B3AHcppdwFKrMQQpScggQJrfVPMe4OAJYCPmCt1npbctnTwOXAOmC7
+1jqqtfYDe4E1s11eIYQoVQXrk9Bax5VSjwPfAL4POCyrR4BaoAYYtiwPAHWzVUYhhCh1BemTmKC1
+vlYp1Qy8AHgtq2qAIcCPESwyl9tqaKjE5XJOd1FPWlNTTaGLUDSkLlKkLlKkLlKKuS4K1XH9YWCR
+1vpuYAyIAX9USl2qtX4OeCfwLEbw2KSU8mAEkXZgV659+3zBGS17PpqaaujrGyl0MYqC1EWK1EWK
+1EVKsdSFXaAq1J3EU8C3lVLPJcvwWaAD+FayY3o38GOtdUIp9Q1gO0Zz1K1a63CByiyEECWnIEFC
+ax0EPpRl1WVZtn0UeHSmyySEEGIyGUwnhBDClgQJIYQQtiRICCGEsHVSQUIp1TBTBRFCCFF88uq4
+VkqdC/wAqFRKvQF4DvgrrfXOmSycEEKIwsr3TuIbwPuBAa11N3A98MiMlUoIIURRyDcFtlJrvVsp
+BYDW+pdKqXtmrlhirvD5fNz7zSfxBaHKFSYejxGKe2nwJrj5+qvNATrW7SbWNdQ3TFp+3VXv4tEf
+PD1pO1Ha7L4/YubleycxqJQ6B0gAKKWuAQZnrFRizrj3m0/SnVCEKtvpc5/NS10jhCrb6aadex95
+Mut21nWZy2+648Gs24nSZvf9ETMv3zuJ64EngNVKqSGM2VivmbFSiTnDFwRHpTE3o8PhwO2pMP+2
+zpCSud3EuszlMWctDsfk7URps/v+iJmXb5C4XGv9JqVUFeBMTtstBA3eBMFEAofDQSKRIBIeAyCR
+SNBQab/dxLrM5c6on0SW7URps/v+iJmXb3PTZwC01qMSIITVzddfTatD4w120Bx9mTVtNXiDHbQ6
+NDd/+qqs21nXZS6/f+OGrNuJ0mb3/REzz5FIJE64kVLqaaAc+AMQmliutd44c0Wbmr6+kRMf0Awr
+llkdi8HJ1sWp3EFZ6O9FMdVtoeuimBRLXTQ11TiyLc/3TuL3GGMjxjBmY534J8S0kg7KmSN1K6Yi
+rz4JrfWd1tdKKQfQNiMlEiVNOihnjtStmIp8R1x/Bvg6UGVZ3AWsnIlCidIlHZQzR+pWTEW+zU03
+A+cAPwRWANdh9E8IMa2kg3LmSN2Kqcg3BbZXa92llHoJOFtr/Xjy7kKIadVQ38DXbrmh0MU4JUnd
+iqnIN0iMKqXeDLwEvE8p9QJwaqSciNekmDJmCm0qdSH1J4pdzuYmpVRr8s8NwHuAnwPzMJ5H/eDM
+Fk3MBZIxkzKVupD6E8XuRHcS/wms1Vq/opTq1lrHgb+YhXKJOUIyZlKmUhdSf6LYnajj2joWQuZq
+EpM0eBNMDMgs9YyZqdSF1J8odicKEtbRyzJ4TkwiGTMpU6kLqT9R7PLtuIb0gCEEULiMmWLs8J1K
+XUjGkSh2JwoSq5VS+5N/t1r+dgAJrfXymSuaKKRiPAlbTXT4OiodBBMJ7n3kSfNkW+xltzNXyy1O
+bScKEqum+w2VUi7gMWAZ4AE2Aa8CjwNxYJfWen1y208AnwQiwCat9ZbpLo/ILtdJuBjk6vAt9rLb
+mavlFqe2nEFCa31wBt7zw0C/1vqvlVL1wP8CLwK3aq23KaUeVkpdiTGp4AZgLVAJbFdKPaO1jsxA
+mUSGYs+6yTXFRLGX3c5cLbc4teU7Lcd0+nfgK8m/nUAUI812W3LZ08DlwDpgu9Y6mnyGxV5gzWwX
+tlQVe9ZNrg7fYi+7nblabnFqO5mO62mhtQ4CKKVqgB8BXwbusWwyAtQCNcCwZXkAqJulYpa8m6+/
+mnsfSbaPV1J0WTe5OnyLvex25mq5xaktr4cOTTel1GLgKeCftdZPKKUOaa2XJNe9F3gr8AzwTkv/
+xFPA17TWO3PtOxqNJVwu58wegBBCnHqyDnOY9TsJpVQL8Atgvdb6N8nFf1ZKXaK13gq8E3gWeAHY
+pJTyAF6gHdh1ov37iqAht1ieNFUMpC5SpC5SpC5SiqUumppqsi6f9SABfAmoB76ilLodY/zFjcCD
+Sik3sBv4sdY6oZT6BrAdI8LdqrUOF6C8QghRsgrS3DST5BnXxUXqIkXqIkXqIqVY6uK1PuNaCCFE
+CZIgIYQQwpYECSGEELYkSAghhLAlQUIIIYStQqTAClEQc3mW1blcdjG3yZ2EKBlz+XnSc7nsYm6T
+ICFKhi9ozK4Kc2+W1blcdjG3SZAQJWMuz7I6l8su5jbpkxAlY6ZnWbXrN5hYHgiXUe2OTak/Ya7N
+ECt9KKcOmZZjBkwMs7f+UKpcYeLxGKG4t6R+NNmmHMj3BDLXTjS33b3ZeLJc8kFIrQ7N1265wXb5
+qexEx1wsU1EUg2KpC5mWowCsnY197rN5qWtEOh7JvxN2rnXW2vUblGJ/Qr8/mnbM/SPRApdITJUE
+iRmUeXJweyrMv0vhRGEn35PmXDu52vUblGJ/wtHuA2nHfLT7QGELJKZMgsQMyjw5RMJj5t+lcKKw
+k+9Jc66dXO0eqTqxvDa8Z9KjVk9VTQta6dHbOL5vBz16G00trYUukpgi6ZOYAWafxJDP7GysdoeJ
+xZJ9EsmOx2JuX58uWfskLPWSqy7y3W6uKJa259lw210P0U279EnkoVjqwq5PQrKbZlCu5zCXNGsY
+z3GRUiz1Z+1A9zqCOF0uAhFP3p3pmdlN1131Lh79wdOz3iE/m4kAcy0bS9iTO4kZUCxXBsUgW13M
+tWwfa3mP7N5Ka/vFJ1X2zOMd1FtoVFfM+vEXU73LbySlWOpCsptE0ZhrHdLW8ro9FSdd9szjjTlr
+C3L8c63eRXGQICFm3VzrkLaWNxIOnXTZM4/XGfUX5PjnWr2L4iBBQsw6uyygYmUt75q2WpqjL59U
+2TOzm+7fuKEgxz/X6l0UB+mTmAHF0sYIhR/dXEx1MR26urq46c4HiTlrcUaHuX/jZ2lb2pbX/z3V
+6uK1kLpIKZa6kD6JEnWqjm4ulJvufJBGdQXNp19CY/u7uemrDxa6SELMKEmBPcX5guCozHN0cx7b
+TXv5ZjEtczreK7PTOeasnYmiznlzbd4tYU+CxCmuwZsgmEiYaY+5Rjfns11mc8vGmz/Kj/77t1M+
+GUzcwTgqHQQTCe595MkZS8ucjvdyRodJWOrJGfNn3S7bSbKpqWY6DiNvhTxRz+bnKmZWwYKEUup1
+wN1a6zcrpVYAjwNxYJfWen1ym08AnwQiwCat9ZZClXeuyndQU77bTTS3TJwkb7xjM20XfmjKJ4OZ
+voOxnij37+tk/umLcFdUT/m97t/4WW76ajJIxvzcf+eGrNtlO0l+897/+xqP5uRkluHubzyB2+OZ
+nbu2At2ZiulXkCChlPoC8BEgkFx0H3Cr1nqbUuphpdSVwO+BDcBaoBLYrpR6RmsdKUSZ56p8Ry3n
+u11mc4unquk15d7newczVdYT5YKzFN0d21h0xiVTfq+2pW389PH7TrhdMZwkM8vQcXiIxuUXz8rV
+/Ux/rmL2FKrjuhN4v+X1+Vrrbcm/nwYuB9YB27XWUa21H9gLrJndYopME80tYOTahwN9ryn3fqbT
+MjMHkHk9zEoKaDGMSZg0wWTIP2uD6STd9tRRkDsJrfX/U0ottSyypl6NALVADTBsWR4A6maheCKH
+zOaWBzbewI+2/HbKc/TM9PxMmVe0Z69onpW28WKYuyizDPNWLGRglq7ui2XeLfHaFWycRDJIPKm1
+vkgpdVhrvTi5/L3AW4FngHda+ieeAr6mtd6Za7/RaCzhcjlnuPRirujc38XHbrybSFk17niAxx+4
+hRXL8xvXcKoZHPRx5z3fpn8kxvwaJ1/9/MdobDT6JAYGfWxMrptXU8Ydn/+4uU6UjKzjJIolSPwU
+uFdrvVUp9TDwLLAVI1BcCHiB3wHnaq3DufYrg+kKJ1s2zarTl0y5LqYjOyffSe1yvdd0DUg82e/F
+bGYnzfbkf6X6G8mmWOqi2AfTfR7YqJR6HnADP9ZaHwe+AWwHfoXRsZ0zQIiZ4fP5uO3uzay/fTO3
+3fUQviFf1u2me0DedOwv38dobnrgMXbs7uXAUT87OnrZdP9jJ12OYjv+fD83kMn/hL2CpcBqrQ8C
+FyX/3gtclmWbR4FHZ7dkIlO+Oe/TkdFjvXo+0nOceSvbX9P+jnYfoLFmtXmFbPcYzVc7u2ldnUrt
+ffWVVLZ1vz+Ko/bEgcZ6/NHxUXZ2drL+9s1THieRWZ8v7+tN29+J7ipOZqzCVLKRZMBcaZDBdEWg
+2H9s+Z78pyPt0XpiC0WOpw1cs9tfrvprWtDKYb0Nl7uCaGSMxTaP0XRX1KQ/j9ybGkmdb6CpcoXN
+4z/etZPW1VcQckx9nERmfYbCEKpszzt99WSC9lQ62qd7wFyx/w5KlQSJIlDso1NznfytP+wqV4R5
+8RfTHtE6Id+J8axX7S1t53Ns13+xfMXpVLvCjMVj5pW09eluRw52UrPsMjyV1ZPqb0F9BbH6c82y
+L3DorMeoljTQZznG9iX15jproBkLDuFOxLJe0cfjMbo7tuH2VBCPhvNq5srFeuLu2t9Jy8rLgOx3
+Kdn6Tw51aeqWL8LjrSaRSFDtTrXWZp6Q//Jdb+Tljk5izlqORIcZGh6iob4h5+c2lTvHzKf0Wcue
++Tu49qa/Y9GSlRIwCqxY+iRKWrG3B+fKeb/7wSfMdvM+99k4nU4e2ngDX7vlhrQf9Wduuy9tYrzP
+3Jp9QNrhA5oju7dyfN8Ojnf9iTLCPLTxBtweDwPl55rt8zfd8aD5vo3tV9B30Eh6y6y/XGXv6uri
+ymv/lndfdwevdOyhPrTT3O6WDR81t1tQX8FCdTEtK9bhdFVw2tnvzdpPEIp7WXTGJbSsWMd4aCht
+jILd3UcuE2mkD228gbWrV+AqrwLgeNdOWlZfkbUM1n6M+We+l4Mv/YLj+3bQ3bGNWCyWdbtu2rnx
+zs1ZJy7MNaHhVMaCTHxf/J5VdNPO3Q8+Ya7L/B1EXM0y4WQRkDuJIlDso1Nz5bx3HB5i3grLqN5D
+Q1m3G0tUpp0AxhLZDzKGK+3xoEdf/hkw+ao1c+S301UBTD5Z5Sp75hQj+/WWrKOprVf0Fa647R2C
+tbnJW9NMTx7NXPmylsHrsb+oyKyn2vmLaVmxDoBQsMN2u8yR8xMTF+aa0HAqTVS5vi+Zv4NYdCzr
+MU4HadrKnwSJIlAMA6+mKhz0p/UbRELZJ7wbD6ZPjBcODmfdblLfQIXR2Zt5Apl4utvEa3e0F2+w
+46TqL98ZXa2B5sqP/m3a+1rvEKzNTSF/LyvX/cUJm7nyZS3DbXc9RLfNRUVmPUXCxon2RNuFA71Z
+Jy7MNaHhVAbM5fq+WH8HRw520rTssqxlnw7F3sRbTCRIFIG5PDp19cqFvJQ8MUbCY6xZmf2KuaY8
+YZ5Ax8cCEAtlbVMfHjzGfMtJxD94DJgcSG/fuIFHn3zafH3f/V9Ja5e/7e7NJ7xKzHdGV6tcHeFG
+c9N5ADS2nsnxV7bQtnzltAf+XBcV1131Lm66w+hDcIR9qEXNxLMEz8x93LRxPbff+51JExfmO6Fh
+vnJ9X6y/A9+Qb0YvnIphbq25QoKEeE2+/LnrLD/mWtsf8+Z/uMU42cQhOtrLyov+2sz8sXZQujw1
+ac00Tk/yTiJLILULrPleJU7lBJirI9x6de4qr2LtWStnJvhbh4tmDIZ99AdPpzWh1dkNisvYx5LF
+S7M2teU7oWG+Jr4vgXAZ1Z647fcl14XTdDQVFXsTbzGRx5fOgGIZQTldXsuPMltdrL99M6HKdvP1
+sc4dLFi5jkQiQecffsTK1/2l+ePt+uNT/M9PHjqp8mbu3xvs4KGN03OyznaFa97B5FgH0zfiOtfo
+6HyPfTpGor8Wr+U3Mh2jw0/0Wc2mYjlf2I24ljsJcULWK/PhUOA1pyZ6HUH27t6abHIIEYuOA8kO
+VBdms1QkPEalJ8762zfjdQRxulwEIp4TTptR5YqkXSUeOdSZdR8ffNcb+eo/feeknled6wo3rbnE
+ZzkJTXEwnd0dUa6mkswr5Iljz0wbzvfZGsXYdj8dTUVzuYl3tkmQECdk/VH2HdzJQpU+SCztxJjH
+09icrvQMpsOv/gYwOijPO+t0Kiq8RufloV5qVr2TkLeavbu3Gv/HbbzvpvsfS22XMU5iXvxFWh06
+uY9OapZeRshbjX7lWRaf+WZzHzfd8RBt6/6PWY6Pfe4uVp917qQgZDdWINcYgnwfOjSVcQiZgaAs
+4uPKa/+WmLOWeLAP2EVZZQuBwR5a1JsJVbYkjzeZzXWCZ2ukPaipcy/zV6WCyVTGe0w3aSqaXTJO
+QpyQNR/e6aqwTb/Md66hgUCMHr2N4/t20NOxlXJn1ByfsP7aD5jbhSOQfCvcnvT3fbWz23acRCju
+NccXLFqyEo+3GoBYZCztfR3u9OymysblWctuN1Yg1xiCfMe+TGUcQubYj4PdfeY+WtZ8gKinhebT
+L6Ft3YcYOqbNMmRmc9k9W8P6OS44+90c79pplmEq4z2m23Q/q+Jk5rgqRXInMYNmMxfb7r2mYwZT
+a8ZMcLCHxIoLs4++zrMZoO9YNwvbU52rg3qL2W5utjdnXO1GwqH0lFev/TgJ68hi61VnODjEsnPe
+ae6j4/l/S9unXV6+XapsrhTafK92rfuIjo8yNDKeah66+l1pGVwTJ8PMppJ3X3dHetqwpyJrvWSm
+Dds9WyPzc4zHIxzft2NaxntMh+luKirGJrViIkFiBs3ml8/uvfItQ67trBkz9aEAg3qL0SeRkZqY
+74nxtEXLCFtOaqe1LjPXZZ6gJq5217TV4oy+bPQnVELT4vq0aTRGBg7jcEAkPMa8tlQTlzXVs6pm
+XtrJtLFpIYN6CzFnLYHBHhateTcwOS/fLlU2VwptvmNfrPs43rWT5Rd8wGzKe/TJp/P6vmSWwzo2
+wjp+JDNt2DazKLM5q8xNy4p10zLeoxhJOmxuEiRm0DHfOI6G1FXiH/fsYf3tm6lyhYnHY8YcRxkd
+ilO92rf7ouf7AzjmC9FzPJl6Gg7hXJC6Kj50zEfXoafwVjUSCgzQtrQ1a8ZMvifGaleYlywd12va
+7K/AifiBZirKK9KP15Kd0rW/k2XnvB13hdGsZB1ZbL3q/OLG+9MCy1nLm/j7r9w0aX+ZZbemyibG
++li1Yhnrb9/M8iWnsWfXUzgqmial0GbrxJ6Yr8j6eVv3QXxsStOzWMsXHxvAFY/Su3crzqif+zdu
+SOuMzyfoWD/HaneYeW01hE5yoKKdXHM3FYr0ceQmQWIG6d0v4W0Yxu2pwN9/iKVr3kHIa3SuGs0o
+503qUMz3aj8zy8jrCGX9ouf7A8hsAurTqamyDx08yMp1H0qlpb7ww+w7yZG/b5XZce2MvmyuSxt1
+a+l0zqyXSSOQqUq+rf0xXv/XV5rNZs6on9s3Zj+pZ7KOFbCmXwYTCc47u/qEJ17zc/M4GM7yeU/s
+I9dI6lzqa+s5u31lshPfT2P7+8x95Hs3YjWTmT+ZdVEMTTtzecaD2SBBYgY5nOXmybB5+YX06G20
+tl8yqd04s207bS4ea6aJJW0xM8uoPr7TbDqxngDz/QHkagKqql+QVr6qugVZ95Eroyf9ORE+5q1M
+7S8Q8Zj7sJ6g1t++mVCy0znXlfUH3/VGbrpzM56qJsKBPm6yGROROdBsKifQKc18eoJ5pyb2keuz
+ynUXuemBx3ipawS3p4LgWBljOvsd4XSbSp9bZl30+6N5jY6fUXle3JQqCRIzqKKq3rZz1d9/EIBI
+OIRz7DhHLM0v7mi/2Xk5Mupn9+Fx3J4KYq4auvf8lmVr3jYpy6ize5ih4XG81TFCgTHue+T7PHjX
+l/P+AdSWx9OaYuoq4ua60aFjaW3eo8PHsu4jV5PVVJ4TYZ0wLxwK0H9gT9ac/1defpE2y53Obf/w
+bc5ZrYzJ8CxjIzLHBvT7o/zfjffTcXiIcNDP6pUL+fLnroMEtie/fMchuGLD7D90jISngcDAEdpe
+lxr8VRYeynr8ua7gc/UZWR+YtPcPP2HZuanOeesdYS5TSXA43LWHeWe+xyzT3Q8+kWq+s9lfZv11
+H97H/rIG3J4K9oZDbLr/Me654+a8yjxdCtVxXYxNb9lIkJghPp8PVzyQdjIYOraX6PgogaEeFq9+
+K1X1LUZa4f/+ZNK4gYmHy3Ttfoq2Cz5gruvc8SN6925lpPcg0ciYGVh8PZ00LGzH7akgGgvzp5f3
+sv72zTmftWBlnZwus/N3ydKldL6Q7JMYHaRtydKsx5yrycp6BdnSdj5df3yK6vqmSc0+1pPLgc69
+jDv7Ka+oxt9/mJXrUp261iabynn+tIAZileYP3rr+IrMsQFHew4wrq5g3gqjvH/Y8RTXfuEB4iEf
+o3Ev3qrRn49eAAAYlElEQVR69oZD3P73m6mra8AXBE98lN4uow8h1ziEAy89g8vdgLusAld1C69u
+fZy6+csIBQZZuaTaHMeR+ZwMu0GC+7sOEHf2mgG4Jxbitrse4ubrr06bFLG6sTWtLppaFmet28yB
+hWPjYwyUn3tSTZ7R8vR6331g0Nzu7gefoNd99qQAMpEpF3fVUhbxMzoaZOmF7zW/M7/77fd493V3
+5BzcON1Zg4XquC7GprdsJEjMkHu/+SSNp7+NHr0Np6sC3zHNivPfbz4A5tCuX1JV/zYcDgdRZ13a
+j628ItXE4iyvSk9vrKgjUVZBosyTFlgCA4fN10d2b0W98SOEHA4a21VaM5fdD8A6OR2kd/4215Vz
+rKbJaCIrK6O5viLrPuoaW9LKWt/YYq7LnNfIU91E8+mXTGr22XjftxiqXIuj0kH1kgZ8r/yKsvqF
+uCvS6yHqqDZfjwd9aXdio0O95jqny5P+/8KjHHnl14QDvbQ0z0+v98o6olQQcdZDfNzM6Nm5/btU
+zV9m7n+o30ft/DrGxsc48L//zfxFq4mGQzgSqfcKB4dYapleZO/vf8Si1W82pxr59gPG8W740iZe
+7OjBW91IcKSPF/78RVa2n0eDN0Fv3zF2dw3irW7EP9jLygs+YH5/Op7/Hjv3NXLtjX9Ha0s9ncnj
+H+7dTywaNiZSDI0w7u82A9CwfwjdE0n2kRlBd2Jg4fHOLSw46zyzLia+J5mD/RqbFuCYbxxjLJKe
+ljw8mLrDtJsSPLPJb/iPT6V9BnUtq2hOTtFy01cfNPuC0por87zwyVehOq7nSlaVBIkZ4guCIzlU
+0eGAMqeb5G/B+DLGYxzft4NIOMTIwJG0H9v4WAAgOYXzQNq6MtdEOmL6YK3KutQJOnPgmd2zFqxy
+/VBi8URaQIqFdprrrCeR/mNdnNF8QequZ28qXdLuKWuZP45XDgywaLVR9p4921EXXZ0MfM+l35X1
+HaZ5lfHa4XSnlW/3tifMbQOD6XXr8lSZdxJ7fvs9Vi1LrQv6j1NeaTSRBYd6jLEB4RAOV3na/scD
+gyw5+61Gc0nHNjOYdO34ofleHm/6lOeeyhrzb1dFtdkO/+LL+1j1xmssd4pPmXeRe/b+iVUXpdZZ
+g31V/WnmfFeHX/0ZrWcaV+PjY4G0snZ3bDP3t7/jhyw3m+XSvz/uipqsTWCfue0eIq4m3GUVhEjQ
+qXezcp7xGTctO5/OF56idt5iopExqusazc/RbkrwSc+7aJhvO1bFOu7EegeT74VPvgrVcT1Xsqok
+SMyQyEgPnXtfoGGBIhoO0XauMXJ14gQVGQvgrZ4HQCKjqcffu58jOAgFBjhj5UKak00Tr7zyCovP
+fjsw+SouOJxq588ceDZ8fA9libGcTTu5Hj26/2ggraN5f0/AXLfhK/fTtNo4QdUvWpt20iivSp00
+8s1GGh3uM+8KPBWpu4WWtvPp3PFjaucvNWaHdVeas8VCIu2E561pMuuzzOkxtwsMdrPk7MtT29Uu
+MNf5Bw6zfO2V5pX6eGDQPPkf+N+n00+oyUCSmYCwctUZLEh+VpHQSPpJcmzUPN5woJ8du724PRV4
+69KTArzVjam/M9ZZg/3ESdfhcJDwNJjblVvqLLN85dWpBwtlfn/alzbgTpbd+vkHxmD5Bamgs/+F
+n5hNZf1de1h69tvNOmu2ZKnZTQmeeWI8w/K+r7z8ZxateY95jNZxJ5nBJZ8Ln3wVah6nieB0ohlx
+C02CxAzR+4/S/sYPp10FxmOR5N3DGG5vnXkSioZDLDrjEvP/utwV5lViQ/Tl9Dx/t3FybVqWOmlG
+wmOMh0bQv/0+lXUtBAaPEA76qapvwd9/mLa17zN/yNamncwOu1aH5sufuop7v/kkX7jrMfqOdXPa
+omX0Hz9CTWvA3MfgwHGzCWM07CRiyaZxub2A0SE/Fujnmg3/OGlsgDUgZbbJxyNhS7NZ6u7BVV5F
+NJIaJDbiO0oCjGaajI716HgQT0U1ja1nMjLYzUJ1cTJ4Pmc+AjSRSDDq66amyWjzdjjKzDu96Pgo
+8XjUvJMYH/Wl3+kFBs27wGhk3NzfgoZys26vuPqGtMA/Hhzi0K5fMTrUQyIeZ6LBLug/TjiUqttQ
+YNDcXyTjQUDWAYNOy3EkxlJ3m5kXCNaBdRWMmuualp3PwO7/ZPGyVUZQ2PDRrO365RkPgSr3pvqq
+Vi1fhNO1n0DQY+5jgt0U8pNOjJb37TrYZTt1e2ZwmcpDporNRHAqlllg7chU4TOgqamGNZffwNI1
+bzeXHevcge9oB1UNCwkOHWPJ2ZdTWWe02b/y3BPUNbeZ7cjB4WM0LDidaDhES4OHJQsakifX1CC8
+Q12a0ZjRuRoJjzE6cJBVlqC057ff49zzLuDI0V7mrUgFII9/F/NrXclU1OPMW3mpuW5g31YiIT8t
+q6+gR28zT64TzSC18xcbdzp9+5nXeqbRPn90L/WnrTLb6wODPbS/8SqOTHQYJ/9/766njGYLywC6
+e+64mWs+eSP7u4epql9IYKgbT3kN3tr5uNwVjI36GAsM4K1tZnToKKed/ibqW9pIJBLs+s23aDhN
+mXXm7+2iet4iXJ5KWtrW4iqvokdvY2x0iHg0gre6kcDQMWKRMWrmLyY4fJzx0SHWXH5DWtPMojMu
+ofOF/yARj+GtNgYPBgaP0LRsLW5PBYNH97Di/FTQ7dj2XZpbl9G+pJ5Pf+RKMxCODnSx99AA3roF
+jPp6oMxF44KVRp+Jr4dVbzAmFgyHAuz741NU1S9kdKiHlUvnUzt/OQ2V0Nt7NNUnMXCYMqeb6voF
+BEf6qfJEjb6LSvjTiy8RK19gPBFvdIgx/zEaW5bhCPtYvnQB0bI6GirhL991Ebff9x3zgUTLFjUT
+dzfknBH3ims20HxWatzFvt9/nxWvv9p8PTFNd86BnlnWrTp9yclNm15EU3tPt2IJEjJV+CwaGPQR
+GunLyGzawwpLx2N3xzYq61qS2yQmtSOb7dwv/BBny+vTrvbvueWGjB9NLX/W6c9erm9azEMbJw/Q
+OtpzgPGaK7KmoobC4PY2G1fu7lS/RnR8lEQ8ynjQz3D/AVzuciJjo4QCA4wHA4wMHKSq7jT8/QdJ
+JOIcevlX+PsOMnR0D7VNywgMdRMJBVlz+QfME+PzLzzFW6+5FX9fPw5nGTigrMxFeGyEFRe+3yxT
+x/bvAhAZC9Gjn8Pfuy8ZTKrS6kwPfY8yp4uQv5fI+CjuimpikTBjIwOceem1hPy9jA4fo6phAWOB
+QSLhIOHQqJm1NTp8jPDYCPFomHBoiJUXftD8rF761b8w0n+AqvqFJBJxQiN9eLxGs05F7Xxicejo
+PMjX/ulbHB5yJ4PJAO2Wvgb9/PeJx+OE/H1UVKemB+k7uJP2N33EcrzfYe385ZBIMOgfJxYdI56I
+4XCAuig1Y+3Rl//THPX+jr++xbwLcpY5KXOWkyirIFxWj9vl4YE7jO0+c8vX0zqNdzz3BHVNSwkF
+Btj2hz+z/HVXmesmOo1PW7Qs7Ul8lXVNRMdH6T2wE5e7gmPBXnxDvrSxGpmprPnOiJve/Jk+K8HN
+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
+"
+>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>        Avg. Survival Rate  Avg. Fare
+Class1            0.629630  84.154687
+Class2            0.472826  20.662183
+Class3            0.242363  13.675550
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[141]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Survival rate by age group</span>
-
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span><span class="s1">&#39;int16&#39;</span><span class="p">)</span>
 <span class="n">age_bin</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">titanic_df</span><span class="o">.</span><span class="n">Age</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
-<span class="n">count_of_passenger_by_age</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">age_bin</span><span class="p">)[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="n">survived_passenger_by_age</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">age_bin</span><span class="p">)[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">survival_rate_by_age</span> <span class="o">=</span> <span class="n">survived_passenger_by_age</span> <span class="o">/</span> <span class="n">count_of_passenger_by_age</span>
+<span class="n">survival_rate_by_age</span> <span class="o">=</span> <span class="n">survival_rate_calculator</span><span class="p">(</span><span class="n">titanic_df</span><span class="p">,</span> <span class="n">age_bin</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="n">survival_rate_by_age</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Survival Rate by Age Group(Total Survivers)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1052,7 +1632,7 @@ IDczy5yD3Mwscw5yM7PM/X9svhWe9xzfHgAAAABJRU5ErkJggg==
 (50, 60]    0.404762
 (60, 70]    0.235294
 (70, 80]    0.200000
-Name: Survived, dtype: float64
+dtype: float64
 </pre>
 </div>
 </div>
@@ -1063,13 +1643,13 @@ Name: Survived, dtype: float64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[302]:</div>
+<div class="prompt input_prompt">In&nbsp;[142]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Survival rate by gender group</span>
-<span class="n">gender_distribution</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Sex&#39;</span><span class="p">)[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="n">gender_survived</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Sex&#39;</span><span class="p">)[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">gender_survival_rate</span> <span class="o">=</span> <span class="n">gender_survived</span> <span class="o">/</span> <span class="n">gender_distribution</span>
+<span class="n">gender_survival_rate</span> <span class="o">=</span> <span class="n">survival_rate_calculator</span><span class="p">(</span><span class="n">titanic_df</span><span class="p">,</span> <span class="s1">&#39;Sex&#39;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="n">gender_survival_rate</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Survival rate by gender&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1221,21 +1801,27 @@ Survival rate(female vs male): 3.92803716473
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[313]:</div>
+<div class="prompt input_prompt">In&nbsp;[143]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c1"># Compare survival rate by sex and age. There is gender inequality across all age groups, except the age group of 0-10.</span>
+<div class=" highlight hl-ipython2"><pre><span class="c1"># Compare survival rate by sex and age. </span>
 
-<span class="n">age_bin</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">male_df</span><span class="o">.</span><span class="n">Age</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">male_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">age_bin</span><span class="p">)[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">male_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">age_bin</span><span class="p">)[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">male_survival_rate</span> <span class="o">=</span> <span class="n">s</span><span class="o">/</span><span class="n">c</span>
-<span class="n">male_survival_rate</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span> <span class="s1">&#39;male&#39;</span><span class="p">)</span>
-<span class="n">female_survival_rate</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;female&#39;</span><span class="p">)</span>
+<span class="n">male_df</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">titanic_df</span><span class="o">.</span><span class="n">Sex</span> <span class="o">==</span> <span class="s1">&#39;male&#39;</span><span class="p">]</span>
+<span class="n">female_df</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">titanic_df</span><span class="o">.</span><span class="n">Sex</span> <span class="o">==</span> <span class="s1">&#39;female&#39;</span><span class="p">]</span>
+
+<span class="n">male_age_bin</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">male_df</span><span class="o">.</span><span class="n">Age</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+<span class="n">male_survival_rate_by_age</span> <span class="o">=</span> <span class="n">survival_rate_calculator</span><span class="p">(</span><span class="n">male_df</span><span class="p">,</span> <span class="n">male_age_bin</span><span class="p">)</span>
+<span class="n">female_age_bin</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">female_df</span><span class="o">.</span><span class="n">Age</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+<span class="n">female_survival_rate_by_age</span> <span class="o">=</span> <span class="n">survival_rate_calculator</span><span class="p">(</span><span class="n">female_df</span><span class="p">,</span> <span class="n">female_age_bin</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">male_survival_rate_by_age</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span> <span class="s1">&#39;male&#39;</span><span class="p">)</span>
+<span class="n">female_survival_rate_by_age</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;female&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Survival Rate by Sex and Age&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="k">print</span> <span class="n">male_survival_rate</span>
+
+<span class="k">print</span> <span class="s1">&#39;There is gender inequality across all age groups, except the age group of 0-10.&#39;</span>
 </pre></div>
 
 </div>
@@ -1425,16 +2011,7 @@ IiKRU5CLiEROQS4iEjkFuYhI5P4/GgNqe5kRTusAAAAASUVORK5CYII=
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Age
-(0, 10]     0.575758
-(10, 20]    0.144928
-(20, 30]    0.154362
-(30, 40]    0.230000
-(40, 50]    0.218182
-(50, 60]    0.142857
-(60, 70]    0.071429
-(70, 80]    0.200000
-Name: Survived, dtype: float64
+<pre>There is gender inequality across all age groups, except the age group of 0-10.
 </pre>
 </div>
 </div>
@@ -1445,13 +2022,15 @@ Name: Survived, dtype: float64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[314]:</div>
+<div class="prompt input_prompt">In&nbsp;[144]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Compare the age distribution of those who did not survive by sex</span>
 
 <span class="n">died_male_df</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">titanic_df</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">]</span><span class="o">==</span> <span class="s1">&#39;male&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">titanic_df</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
 <span class="n">died_female_df</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">titanic_df</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">]</span><span class="o">==</span> <span class="s1">&#39;female&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">titanic_df</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">died_male_df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">)</span>
@@ -1625,10 +2204,12 @@ OHic9fLUEAgiIgkXiwOgIiKy7SjoRUQSTkEvIpJwCnoRkYRT0IuIJJyCXkQk4RT0IiIJp6AXEUm4
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[311]:</div>
+<div class="prompt input_prompt">In&nbsp;[145]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">survived_df</span> <span class="o">=</span> <span class="n">titanic_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">titanic_df</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">survived_df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Total Survivers&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distribution of Survivers&#39;</span><span class="p">)</span>
